@@ -1,82 +1,116 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PLAYDEVX Chat</title>
+  <title>PLAYDEVX • Chat</title>
+  <meta name="description" content="PLAYDEVX support chat powered by Botpress" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet" />
 
-  <!-- โหลดสคริปต์ Botpress -->
+  <!-- Botpress Webchat injector -->
   <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
 
   <style>
+    :root { color-scheme: dark; }
     html, body {
-      margin: 0;
-      padding: 0;
       height: 100%;
+      margin: 0;
+      background: #0b0f17;
+      font-family: "Sarabun", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     }
+    .app {
+      min-height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+    header, footer {
+      padding: 10px 14px;
+      color: #cbd5e1;
+      background: #0b0f17;
+      border-bottom: 1px solid #1f2937;
+    }
+    footer { border-top: 1px solid #1f2937; border-bottom: none; }
+    .brand {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 600; letter-spacing: .2px;
+    }
+    .brand small { opacity:.7; font-weight:400; }
     #webchat {
       width: 100%;
-      height: 100vh;
-    }
-    #webchat .bpWebchat {
-      position: unset;
-      width: 100%;
-      height: 100%;
+      height: calc(100vh - 100px); /* header+footer ราวๆ 100px */
       max-width: 100%;
-      max-height: 100%;
+      margin: 0;
     }
-    #webchat .bpFab {
-      display: none;
+    /* Make widget fill the container and hide floating button */
+    #webchat .bpWebchat {
+      position: unset !important;
+      width: 100% !important;
+      height: 100% !important;
+      max-width: 100% !important;
+      max-height: 100% !important;
     }
-    #fallback {
-      display: none;
-      width: 100%;
-      height: 100vh;
-      border: 0;
-    }
+    #webchat .bpFab { display: none !important; }
+    a { color: #60a5fa; text-decoration: none; }
+    a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
-  <!-- Container หลัก -->
-  <div id="webchat"></div>
+  <div class="app">
+    <header>
+      <div class="brand">
+        <span>PLAYDEVX</span>
+        <small>Support Chat</small>
+      </div>
+    </header>
 
-  <!-- Fallback iframe -->
-  <iframe id="fallback" src="https://cdn.botpress.cloud/webchat/v3.2/shareable.html?configUrl=https://files.bpcontent.cloud/2025/09/11/03/20250911034343-S4L4RM4V.json"></iframe>
+    <main>
+      <!-- Container for full-embed webchat -->
+      <div id="webchat"></div>
+    </main>
+
+    <footer>
+      <small>
+        <a href="https://www.playdevx.com" target="_blank" rel="noopener">www.playdevx.com</a>
+        • <a href="mailto:info@playdevx.com">info@playdevx.com</a>
+        • <a href="tel:+66987935595">+66(0)987935595</a>
+      </small>
+    </footer>
+  </div>
 
   <script>
-    function initBotpress() {
-      try {
-        if (!window.botpress || !window.botpress.init) throw new Error("inject.js not ready");
-        window.botpress.on('webchat:ready', () => window.botpress.open());
-        window.botpress.init({
-          botId: "248328cb-7387-48d9-8447-d852a54c7cbe",
-          clientId: "92f711b4-c9cc-49eb-bace-8ee451d031d2",
-          selector: "#webchat",
-          configuration: {
-            version: "v2",
-            composerPlaceholder: "คุณสามารถ upload ใบเสร็จของคุณให้เราได้เลย",
-            botName: "PLAYDEVX",
-            website: { title: "https://www.playdevx.com", link: "https://www.playdevx.com" },
-            email:   { title: "info@playdevx.com",       link: "mailto:info@playdevx.com" },
-            phone:   { title: "+66(0)987935595",         link: "tel:+66987935595" },
-            privacyPolicy:  { title: "Privacy policy",   link: "https://www.playdevx.com/privacy-policy/" },
-            color: "#3276EA",
-            variant: "solid",
-            headerVariant: "glass",
-            themeMode: "dark",
-            fontFamily: "Sarabun",
-            radius: 4,
-            feedbackEnabled: false,
-            footer: "[⚡ by PLAYDEVX](https://playdevx.com/?from=webchat)"
-          }
-        });
-      } catch (err) {
-        // ถ้า inject.js โหลดไม่ขึ้น → ใช้ iframe
-        document.getElementById("webchat").style.display = "none";
-        document.getElementById("fallback").style.display = "block";
+    // เปิดอัตโนมัติเมื่อพร้อม
+    window.botpress?.on?.("webchat:ready", () => {
+      window.botpress.open();
+    });
+
+    // เริ่มต้น Webchat (ใส่ค่าของคุณด้านล่าง)
+    window.botpress.init({
+      botId: "248328cb-7387-48d9-8447-d852a54c7cbe",
+      clientId: "92f711b4-c9cc-49eb-bace-8ee451d031d2",
+      selector: "#webchat",
+      configuration: {
+        version: "v2",
+        composerPlaceholder: "คุณสามารถ upload ใบเสร็จของคุณให้เราได้เลย",
+        botName: "PLAYDEVX",
+        botDescription: "",
+        website: { title: "https://www.playdevx.com", link: "https://www.playdevx.com" },
+        email:   { title: "info@playdevx.com",       link: "info@playdevx.com" },
+        phone:   { title: "+66(0)987935595",         link: "+66(0)987935595" },
+        termsOfService: { title: "Terms of service", link: "" },
+        privacyPolicy:  { title: "Privacy policy",   link: "https://www.playdevx.com/privacy-policy/" },
+        color: "#3276EA",
+        variant: "solid",
+        headerVariant: "glass",
+        themeMode: "dark",
+        fontFamily: "Sarabun",
+        radius: 4,
+        feedbackEnabled: false,
+        footer: "[⚡ by Botpress](https://botpress.com/?from=webchat)",
+        additionalStylesheetUrl: "https://files.bpcontent.cloud/2025/09/11/03/20250911035903-46SVXOB8.css"
       }
-    }
-    window.addEventListener("load", initBotpress);
+    });
   </script>
 </body>
 </html>
