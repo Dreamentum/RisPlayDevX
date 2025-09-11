@@ -8,7 +8,6 @@
   <!-- โหลดสคริปต์ Botpress -->
   <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
 
-  <!-- สไตล์พื้นฐาน -->
   <style>
     html, body {
       margin: 0;
@@ -29,40 +28,55 @@
     #webchat .bpFab {
       display: none;
     }
+    #fallback {
+      display: none;
+      width: 100%;
+      height: 100vh;
+      border: 0;
+    }
   </style>
 </head>
 <body>
-  <!-- พื้นที่สำหรับแชท -->
+  <!-- Container หลัก -->
   <div id="webchat"></div>
 
-  <!-- Script ตั้งค่า Botpress -->
+  <!-- Fallback iframe -->
+  <iframe id="fallback" src="https://cdn.botpress.cloud/webchat/v3.2/shareable.html?configUrl=https://files.bpcontent.cloud/2025/09/11/03/20250911034343-S4L4RM4V.json"></iframe>
+
   <script>
-    window.addEventListener('load', () => {
-      window.botpress.on('webchat:ready', () => window.botpress.open());
-      window.botpress.init({
-        botId: "248328cb-7387-48d9-8447-d852a54c7cbe",
-        clientId: "92f711b4-c9cc-49eb-bace-8ee451d031d2",
-        selector: "#webchat",
-        configuration: {
-          version: "v2",
-          composerPlaceholder: "คุณสามารถ upload ใบเสร็จของคุณให้เราได้เลย",
-          botName: "PLAYDEVX",
-          website: { title: "https://www.playdevx.com", link: "https://www.playdevx.com" },
-          email:   { title: "info@playdevx.com",       link: "mailto:info@playdevx.com" },
-          phone:   { title: "+66(0)987935595",         link: "tel:+66987935595" },
-          termsOfService: { title: "Terms of service", link: "" },
-          privacyPolicy:  { title: "Privacy policy",   link: "https://www.playdevx.com/privacy-policy/" },
-          color: "#3276EA",
-          variant: "solid",
-          headerVariant: "glass",
-          themeMode: "dark",
-          fontFamily: "Sarabun",
-          radius: 4,
-          feedbackEnabled: false,
-          footer: "[⚡ by PLAYDEVX](https://playdevx.com/?from=webchat)"
-        }
-      });
-    });
+    function initBotpress() {
+      try {
+        if (!window.botpress || !window.botpress.init) throw new Error("inject.js not ready");
+        window.botpress.on('webchat:ready', () => window.botpress.open());
+        window.botpress.init({
+          botId: "248328cb-7387-48d9-8447-d852a54c7cbe",
+          clientId: "92f711b4-c9cc-49eb-bace-8ee451d031d2",
+          selector: "#webchat",
+          configuration: {
+            version: "v2",
+            composerPlaceholder: "คุณสามารถ upload ใบเสร็จของคุณให้เราได้เลย",
+            botName: "PLAYDEVX",
+            website: { title: "https://www.playdevx.com", link: "https://www.playdevx.com" },
+            email:   { title: "info@playdevx.com",       link: "mailto:info@playdevx.com" },
+            phone:   { title: "+66(0)987935595",         link: "tel:+66987935595" },
+            privacyPolicy:  { title: "Privacy policy",   link: "https://www.playdevx.com/privacy-policy/" },
+            color: "#3276EA",
+            variant: "solid",
+            headerVariant: "glass",
+            themeMode: "dark",
+            fontFamily: "Sarabun",
+            radius: 4,
+            feedbackEnabled: false,
+            footer: "[⚡ by PLAYDEVX](https://playdevx.com/?from=webchat)"
+          }
+        });
+      } catch (err) {
+        // ถ้า inject.js โหลดไม่ขึ้น → ใช้ iframe
+        document.getElementById("webchat").style.display = "none";
+        document.getElementById("fallback").style.display = "block";
+      }
+    }
+    window.addEventListener("load", initBotpress);
   </script>
 </body>
 </html>
