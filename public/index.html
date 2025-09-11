@@ -1,66 +1,47 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PLAYDEVX Chat</title>
 
-<!-- In your <head> tag -->
-<script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
-<style>
-  #webchat .bpWebchat {
-    position: unset;
-    width: 100%;
-    height: 100%;
-    max-height: 100%;
-    max-width: 100%;
-  }
+  <script defer src="https://cdn.botpress.cloud/webchat/v3.2/inject.js"></script>
 
-  #webchat .bpFab {
-    display: none;
-  }
-</style>
+  <style>
+    html,body{height:100%;margin:0}
+    #webchat{width:100%;height:100vh}
+    #webchat .bpWebchat{position:unset;width:100%;height:100%;max-width:100%;max-height:100%}
+    #webchat .bpFab{display:none}
+  </style>
+</head>
+<body>
+  <div id="webchat"></div>
 
-<!-- Put this on your page BEFORE the script below -->
-<div id="webchat" style="width: 500px; height: 500px;"></div>
-
-<!-- In your <body> tag -->
-<script>
-  window.botpress.on("webchat:ready", () => {
-    window.botpress.open();
-  });
-  window.botpress.init({
-  "botId": "248328cb-7387-48d9-8447-d852a54c7cbe",
-  "configuration": {
-    "version": "v2",
-    "composerPlaceholder": "คุณสามารถ upload ใบเสร็จของคุณให้เราได้เลย",
-    "botName": "PLAYDEVX",
-    "botDescription": "",
-    "website": {
-      "title": "https://www.playdevx.com",
-      "link": "https://www.playdevx.com"
-    },
-    "email": {
-      "title": "info@playdevx.com",
-      "link": "info@playdevx.com"
-    },
-    "phone": {
-      "title": "+66(0)987935595",
-      "link": "+66(0)987935595"
-    },
-    "termsOfService": {
-      "title": "Terms of service",
-      "link": ""
-    },
-    "privacyPolicy": {
-      "title": "Privacy policy",
-      "link": "https://www.playdevx.com/privacy-policy/"
-    },
-    "color": "#3276EA",
-    "variant": "solid",
-    "headerVariant": "glass",
-    "themeMode": "dark",
-    "fontFamily": "Sarabun",
-    "radius": 4,
-    "feedbackEnabled": false,
-    "footer": "[⚡ by PLAYDEVX](https://playdevx.com/?from=webchat)",
-    "additionalStylesheetUrl": "https://files.bpcontent.cloud/2025/09/11/03/20250911035903-46SVXOB8.css"
-  },
-  "clientId": "92f711b4-c9cc-49eb-bace-8ee451d031d2",
-  "selector": "#webchat"
-});
-</script>
+  <script>
+    // รอให้สคริปต์ inject พร้อมก่อน
+    window.addEventListener('load', () => {
+      window.botpress.on('webchat:ready', () => window.botpress.open());
+      window.botpress.init({
+        botId: "248328cb-7387-48d9-8447-d852a54c7cbe",
+        clientId: "92f711b4-c9cc-49eb-bace-8ee451d031d2",
+        selector: "#webchat",
+        configuration: {
+          version: "v2",
+          composerPlaceholder: "คุณสามารถ upload ใบเสร็จของคุณให้เราได้เลย",
+          botName: "PLAYDEVX",
+          website: { title: "https://www.playdevx.com", link: "https://www.playdevx.com" },
+          email:   { title: "info@playdevx.com",       link: "mailto:info@playdevx.com" },
+          phone:   { title: "+66(0)987935595",         link: "tel:+66987935595" },
+          termsOfService: { title: "Terms of service", link: "" },
+          privacyPolicy:  { title: "Privacy policy",   link: "https://www.playdevx.com/privacy-policy/" },
+          color: "#3276EA", variant: "solid", headerVariant: "glass",
+          themeMode: "dark", fontFamily: "Sarabun", radius: 4,
+          feedbackEnabled: false,
+          footer: "[⚡ by PLAYDEVX](https://playdevx.com/?from=webchat)",
+          additionalStylesheetUrl: "https://files.bpcontent.cloud/2025/09/11/03/20250911035903-46SVXOB8.css"
+        }
+      });
+    });
+  </script>
+</body>
+</html>
