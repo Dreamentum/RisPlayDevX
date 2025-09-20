@@ -8,14 +8,14 @@ export default async function handler(req, res) {
       path,
       body,
       service = 'objectstorage',
-      host: domain = 'oraclecloud.com'
+      host: domain = 'oraclecloud.com',
+      region = process.env.OCI_REGION || 'ap-singapore-1'
     } = req.body || {};
 
     if (!method || !path) {
       return res.status(400).json({ error: 'Missing required fields: method and path' });
     }
 
-    const region = process.env.OCI_REGION || 'ap-sydney-1';
     const keyId = `${process.env.OCI_TENANCY_OCID}/${process.env.OCI_USER_OCID}/${process.env.OCI_FINGERPRINT}`;
     const privateKeyPem = process.env.OCI_PRIVATE_KEY.replace(/\\n/g, '\n').trim();
 
