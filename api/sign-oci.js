@@ -9,7 +9,7 @@ export default async function handler(req, res) {
       body,
       service = 'objectstorage',
       host: domain = 'oraclecloud.com',
-      region = process.env.OCI_REGION || 'ap-singapore-1'
+      region = 'ap-singapore-1'
     } = req.body || {};
 
     if (!method || !path) {
