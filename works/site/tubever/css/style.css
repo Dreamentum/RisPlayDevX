@@ -1,0 +1,229 @@
+/* --- CSS Variables & Theming --- */
+:root {
+    --primary-color: #DE2525; /* TubeVer Red */
+    --secondary-color: #555555;
+    --bg-light: #ffffff;
+    --text-light: #333333;
+    --card-bg-light: #f8f9fa;
+    
+    --bg-dark: #121212;
+    --text-dark: #f0f0f0;
+    --card-bg-dark: #1e1e1e;
+    
+    --font-heading: 'Poppins', sans-serif;
+    --font-body: 'Inter', sans-serif;
+}
+
+/* Light Theme Overrides */
+[data-bs-theme="light"] {
+    --bs-body-bg: var(--bg-light);
+    --bs-body-color: var(--text-light);
+    --bs-tertiary-bg: #f8f9fa;
+}
+
+/* Dark Theme Overrides (Default in HTML) */
+[data-bs-theme="dark"] {
+    --bs-body-bg: var(--bg-dark);
+    --bs-body-color: var(--text-dark);
+    --bs-primary: var(--primary-color);
+    --bs-primary-rgb: 222, 37, 37;
+    --bs-tertiary-bg: #1a1a1a;
+}
+
+/* --- Global Styles --- */
+body {
+    font-family: var(--font-body);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+    font-family: var(--font-heading);
+}
+
+.section-padding {
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.text-primary {
+    color: var(--primary-color) !important;
+}
+.bg-primary {
+    background-color: var(--primary-color) !important;
+    color: #fff !important;
+}
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #fff;
+    font-weight: 600;
+}
+.btn-primary:hover {
+    background-color: #ba1e1e;
+    border-color: #ba1e1e;
+    color: #fff;
+}
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* --- Navbar --- */
+.tubever-nav {
+    backdrop-filter: blur(10px);
+    background-color: rgba(var(--bs-body-bg-rgb), 0.9);
+    border-bottom: 1px solid rgba(222, 37, 37, 0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.theme-btn {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+/* --- Hero Section Background --- */
+.hero-bg {
+    background: radial-gradient(circle at center, rgba(222, 37, 37, 0.08) 0%, transparent 70%);
+}
+
+.hero-subtitle {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* --- Custom Rounded Buttons --- */
+.tube-btn, .tube-btn-outline {
+    font-family: var(--font-heading);
+    border-radius: 50px;
+    padding: 12px 32px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(222, 37, 37, 0.2);
+}
+.tube-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(222, 37, 37, 0.4);
+}
+.tube-btn-outline {
+    box-shadow: none;
+}
+
+/* --- Terminal Card (Adjusted for clean look) --- */
+.terminal-card {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+[data-bs-theme="dark"] .terminal-card {
+    background-color: #1a1a1a;
+    border-color: #2d2d2d;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* --- Feature Cards --- */
+.feature-card {
+    background-color: var(--card-bg-light);
+    border: 1px solid rgba(222, 37, 37, 0.1) !important;
+    border-radius: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(222, 37, 37, 0.15);
+    border-color: rgba(222, 37, 37, 0.3) !important;
+}
+[data-bs-theme="dark"] .feature-card {
+    background-color: var(--card-bg-dark);
+}
+.feature-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    background-color: rgba(222, 37, 37, 0.1);
+    color: var(--primary-color);
+}
+.feature-icon.bg-success {
+    background-color: rgba(25, 135, 84, 0.1) !important;
+    color: #198754 !important;
+}
+.feature-icon.bg-warning {
+    background-color: rgba(255, 193, 7, 0.1) !important;
+    color: #ffc107 !important;
+}
+
+/* --- Wheel Game CSS --- */
+.wheel-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+.wheel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    border: 5px solid var(--bs-body-color);
+    box-shadow: 0 0 20px rgba(222, 37, 37, 0.15);
+    transition: transform 3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.wheel-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    background: var(--bs-body-bg);
+    border: 3px solid var(--bs-body-color);
+    border-radius: 50%;
+    z-index: 10;
+}
+.wheel-segment {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 50%;
+    transform-origin: 0% 100%;
+}
+/* Approximating segments with CSS transforms for a 6-slice wheel */
+.wheel-segment:nth-child(1) { transform: rotate(0deg) skewY(-30deg); background-color: #DE2525; }
+.wheel-segment:nth-child(2) { transform: rotate(60deg) skewY(-30deg); background-color: #f8f9fa; }
+.wheel-segment:nth-child(3) { transform: rotate(120deg) skewY(-30deg); background-color: #555555; }
+.wheel-segment:nth-child(4) { transform: rotate(180deg) skewY(-30deg); background-color: #DE2525; }
+.wheel-segment:nth-child(5) { transform: rotate(240deg) skewY(-30deg); background-color: #f8f9fa; }
+.wheel-segment:nth-child(6) { transform: rotate(300deg) skewY(-30deg); background-color: #555555; }
+
+.wheel-pointer {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 30px solid var(--primary-color);
+    z-index: 20;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}

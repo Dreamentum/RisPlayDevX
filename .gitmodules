@@ -1,0 +1,10 @@
+[submodule "themes/blowfish"]
+	path = themes/blowfish
+	url = https://github.com/nunocoracao/blowfish.git
+	branch = main
+[submodule "projects/website/clarity/exampleSite/themes/hugo-clarity"]
+	path = projects/website/clarity/exampleSite/themes/hugo-clarity
+	url = https://github.com/chipzoller/hugo-clarity
+[submodule "projects/website/themes/mana"]
+	path = projects/website/themes/mana
+	url = https://github.com/Livour/hugo-mana-theme.git
